@@ -20,7 +20,7 @@ jobs:
       
       - id: debug
         run: |
-          echo "${{ fromJson(steps.set_vars.outputs.branch_json) }}"
+          echo "${{ steps.set_vars.outputs.branch_json }}"
           echo "${{ steps.set_vars.outputs.branch }}"
 
       # Drafts your next Release notes as Pull Requests are merged into "master"

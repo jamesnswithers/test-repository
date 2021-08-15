@@ -33,7 +33,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           commitish: ${{ steps.set_vars.outputs.branch }}
           name: ${{ fromJson(steps.set_vars.outputs.branch_json)[steps.set_vars.outputs.branch].releaseName }}
           version: ${{ fromJson(steps.set_vars.outputs.branch_json)[steps.set_vars.outputs.branch].releaseName }}

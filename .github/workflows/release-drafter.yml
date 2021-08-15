@@ -16,6 +16,11 @@ jobs:
         run: |
           content=`cat ./.github/branchInfo.json`
           echo "##[set-output name=branch_json;]$content"
+          # the following lines are only required for multi line json
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          # end of optional handling for multi line json
           echo "##[set-output name=branch;]${GITHUB_REF#refs/heads/}"
       
       - id: debug

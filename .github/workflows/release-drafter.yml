@@ -1,0 +1,27 @@
+name: Release Drafter
+
+on:
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - release-*
+
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-latest
+    steps:
+      - id: set_vars
+        run: |
+          content=`cat ./.github/branchInfo.json`
+          echo "##[set-output name=branch_json;]$content"
+          echo "##[set-output name=branch;]${GITHUB_REF#refs/heads/}"
+      
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          commitish: ${{ steps.set_vars.outputs.branch }}
+          name: ${{ fromJson(steps.set_vars.outputs.branch_json)[branch].releaseName }}
+          version: ${{ fromJson(steps.set_vars.outputs.branch_json)[branch].releaseName }}

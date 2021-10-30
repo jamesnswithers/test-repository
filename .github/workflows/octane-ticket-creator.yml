@@ -1,0 +1,13 @@
+name: Octane Ticket Creator
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  issue_comment:
+    name: Issue comment
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: jamesnswithers/octane-story-creator-action@main

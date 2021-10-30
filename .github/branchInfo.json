@@ -1,0 +1,14 @@
+{
+  "release-PR2107": {
+    "iteration": "development-21.4",
+    "preceedingIteration": "development-21.3",
+    "releaseName": "PR2107",
+    "tagName": "PR2107"
+  },
+  "release-PR2108": {
+    "iteration": "development-22.5",
+    "preceedingIteration": "development-21.4",
+    "releaseName": "PR2108",
+    "tagName": "PR2108"
+  }
+}

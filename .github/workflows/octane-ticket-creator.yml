@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: jamesnswithers/octane-story-creator-action@main
-        with:
+        env:
           SERVER: '${{ secrets.OCTANE_SERVER }}'
           WORKSPACE: '${{ secrets.OCTANE_WORKSPACE }}'
           SHARED_SPACE: '${{ secrets.OCTANE_SHAREDSPACE }}'

@@ -17,3 +17,4 @@ jobs:
           SHARED_SPACE: '${{ secrets.OCTANE_SHAREDSPACE }}'
           USER: '${{ secrets.OCTANE_USER }}'
           PASSWORD: '${{ secrets.OCTANE_PASSWORD }}'
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'

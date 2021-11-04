@@ -41,6 +41,10 @@
       "release": {
         "type": "release",
         "id": 62001
+      },
+      "team": {
+        "type": "team",
+        "id": 79001
       }
     }
   }

@@ -25,7 +25,7 @@
       }
     }
   },
-  "Release Management": { 
+  "ReleaseManagement": { 
     "defect": {
       "description": "The default description for a defect",
       "application_modules": {

@@ -10,7 +10,7 @@ jobs:
     if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
-      - uses: jamesnswithers/octane-story-creator-action@main
+      - uses: jamesnswithers/octane-story-creator-action@feature/additional-story-fields
         env:
           SERVER: '${{ secrets.OCTANE_SERVER }}'
           WORKSPACE: '${{ secrets.OCTANE_WORKSPACE }}'
@@ -18,4 +18,3 @@ jobs:
           USER: '${{ secrets.OCTANE_USER }}'
           PASSWORD: '${{ secrets.OCTANE_PASSWORD }}'
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          APPLICATIONS: 141001

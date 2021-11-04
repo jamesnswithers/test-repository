@@ -1,26 +1,32 @@
 {
-  "defect": {
-    "description": "The default description for a defect",
-    "application_modules": {
-      "data": [
-        {"type": "application_module", "id": 141001}
-      ]
-    }
-  },
-  "quality": {
-    "description": "The default description for a quality story",
-    "application_modules": {
-      "data": [
-        {"type": "application_module", "id": 141001}
-      ]
-    }
-  },
-  "story": {
-    "description": "The default description for a story",
-    "application_modules": {
-      "data": [
-        {"type": "application_module", "id": 141001}
-      ]
+  "default": { 
+    "defect": {
+      "description": "The default description for a defect",
+      "application_modules": {
+        "data": [
+          {"type": "application_module", "id": 141001}
+        ]
+      }
+    },
+    "quality": {
+      "description": "The default description for a quality story",
+      "application_modules": {
+        "data": [
+          {"type": "application_module", "id": 141001}
+        ]
+      }
+    },
+    "story": {
+      "description": "The default description for a story",
+      "application_modules": {
+        "data": [
+          {"type": "application_module", "id": 141001}
+        ]
+      },
+      "program": {
+        "type": "program",
+        "id": 30001
+      }
     }
   }
 }

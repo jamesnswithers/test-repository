@@ -26,6 +26,14 @@
       "program": {
         "type": "program",
         "id": 30001
+      },
+      "milestone": {
+        "type": "milestone",
+        "id": 154004
+      },
+      "release": {
+        "type": "release",
+        "id": 62001
       }
     }
   }

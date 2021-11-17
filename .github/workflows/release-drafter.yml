@@ -10,6 +10,9 @@ jobs:
   update_release_draft:
     runs-on: ubuntu-latest
     steps:
+      - name: Git checkout
+        uses: actions/checkout@v1
+        
       - id: set_vars
         run: |
           content=`cat ./.github/branchInfo.json`

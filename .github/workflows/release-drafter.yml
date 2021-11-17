@@ -5,6 +5,10 @@ on:
     # branches to consider in the event; optional, defaults to all
     branches:
       - release-*
+  pull_request:
+    branches:
+      - development
+    types: ['opened', 'edited', 'reopened', 'ready_for_review']
 
 jobs:
   update_release_draft:
@@ -27,6 +31,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          disable-releaser: github.ref != 'refs/heads/main'
+          disable-autolabeler: github.ref == 'refs/heads/main'
           commitish: ${{ steps.set_vars.outputs.branch }}
           name: ${{ fromJson(steps.set_vars.outputs.branch_json)[steps.set_vars.outputs.branch].releaseName }}
           version: ${{ fromJson(steps.set_vars.outputs.branch_json)[steps.set_vars.outputs.branch].releaseName }}

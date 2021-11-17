@@ -31,8 +31,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          disable-releaser: github.ref != 'refs/heads/main'
-          disable-autolabeler: github.ref == 'refs/heads/main'
+          disable-releaser: ${{ github.ref != 'refs/heads/main' }}
+          disable-autolabeler: ${{ github.ref == 'refs/heads/main' }}
           commitish: ${{ steps.set_vars.outputs.branch }}
           name: ${{ fromJson(steps.set_vars.outputs.branch_json)[steps.set_vars.outputs.branch].releaseName }}
           version: ${{ fromJson(steps.set_vars.outputs.branch_json)[steps.set_vars.outputs.branch].releaseName }}

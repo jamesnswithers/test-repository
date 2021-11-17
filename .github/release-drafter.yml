@@ -38,4 +38,7 @@ autolabeler:
       - '/release/i'
   - label: 'enhancement'
     title:
-      - '/OCTANE-US\d+/'
+      - '/test/'
+  - label: 'bug'
+    rile:
+      - '*.md'

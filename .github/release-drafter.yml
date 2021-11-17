@@ -40,5 +40,5 @@ autolabeler:
     title:
       - '/test/'
   - label: 'bug'
-    rile:
+    files:
       - '*.md'

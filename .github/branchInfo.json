@@ -10,5 +10,29 @@
     "preceedingIteration": "development-21.4",
     "releaseName": "PR2108",
     "tagName": "PR2108"
+  },
+  "release-PR2109": {
+    "iteration": "development-23.1",
+    "preceedingIteration": "development-22.5",
+    "releaseName": "PR2109",
+    "tagName": "PR2109"
+  },
+  "release-PR2110": {
+    "iteration": "development-23.2",
+    "preceedingIteration": "development-23.1",
+    "releaseName": "PR2110",
+    "tagName": "PR2110"
+  },
+  "release-PR2111": {
+    "iteration": "development-23.3",
+    "preceedingIteration": "development-23.2",
+    "releaseName": "PR2111",
+    "tagName": "PR2111"
+  },
+  "release-PR2112": {
+    "iteration": "development-23.4",
+    "preceedingIteration": "development-23.3",
+    "releaseName": "PR2112",
+    "tagName": "PR2112"
   }
 }

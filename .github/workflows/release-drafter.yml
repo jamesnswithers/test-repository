@@ -28,7 +28,7 @@ jobs:
           echo "##[set-output name=branch;]${GITHUB_REF#refs/heads/}"
       
       # Drafts your next Release notes as Pull Requests are merged into "master"
-      - uses: release-drafter/release-drafter@v5
+      - uses: release-drafter/release-drafter@242921599b8dec2acb4a3e87d9c2d56d502b6712
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

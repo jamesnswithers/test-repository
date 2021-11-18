@@ -52,5 +52,5 @@ jobs:
         if: ${{ steps.pr_check.outputs.pr_exists == 'false' }}
         run: |
           echo "pr does not exist [${{ steps.pr_check.outputs.pr_exists }}]"
-          git branch merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }} ${{ github.ref_name }}
+          git branch merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }} origin/${{ github.ref_name }}
           git push -u origin merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}

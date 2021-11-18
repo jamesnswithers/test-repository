@@ -48,7 +48,7 @@ jobs:
           git checkout merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}
           git merge origin/${{ steps.pr_check.outputs.target }}
           git push -u origin merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}
-          gh pr create --title "Draft merge of ${{ github.ref_name }} to ${{ steps.pr_check.outputs.target }}" --base ${{ steps.pr_check.outputs.target }} --draft
+          gh pr create --body "" --title "Draft merge of ${{ github.ref_name }} to ${{ steps.pr_check.outputs.target }}" --base ${{ steps.pr_check.outputs.target }} --draft
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
@@ -60,6 +60,6 @@ jobs:
           git checkout merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}
           git merge origin/${{ steps.pr_check.outputs.target }}
           git push -u origin merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}
-          gh pr create --title "Draft merge of ${{ github.ref_name }} to ${{ steps.pr_check.outputs.target }}" --base ${{ steps.pr_check.outputs.target }} --draft
+          gh pr create --body "" --title "Draft merge of ${{ github.ref_name }} to ${{ steps.pr_check.outputs.target }}" --base ${{ steps.pr_check.outputs.target }} --draft
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

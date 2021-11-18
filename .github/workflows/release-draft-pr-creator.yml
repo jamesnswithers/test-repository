@@ -4,8 +4,6 @@ on:
   push:
     # branches to consider in the event; optional, defaults to all
     branches:
-      - main
-      - development
       - release-*
 
 jobs:
@@ -32,6 +30,7 @@ jobs:
           pr_exists=`gh pr list --base $target --state open --json title,id | jq 'any(.[].title;. == "Draft merge of ${{ github.ref_name }} to '$target'")'`
           echo "$pr_exists"
           echo "##[set-output name=pr_exists;]$pr_exists"
+          echo "##[set-output name=target;]$target"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
@@ -44,3 +43,5 @@ jobs:
         if: ${{ !steps.pr_check.outputs.pr_exists }}
         run: |
           echo "pr does not exist [${{ steps.pr_check.outputs.pr_exists }}]"
+          git branch merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }} ${{ github.ref_name }}
+          git push -u origin merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}

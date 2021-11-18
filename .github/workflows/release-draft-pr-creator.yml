@@ -19,8 +19,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set SSH Git Proto
-        run: gh config set git_protocol ssh --host github.com
+      - name: Get Auth Status
+        run: gh auth status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Shallow Clone of Repo      
         run: gh repo clone ${{ github.repository }} -- --sparse

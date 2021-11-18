@@ -19,6 +19,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check config
+        run: gh config get git_protocol
+
       - name: Shallow Clone of Repo
         run: gh repo clone ${{ github.repository }} -- --sparse
         env:

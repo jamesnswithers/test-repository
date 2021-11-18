@@ -15,4 +15,6 @@ jobs:
     steps:
       # Runs a single command using the runners shell
       - name: Check existing PRs
-        run: gh pr list --repo "$GITHUB_REPOSITORY" --draft --state open
+        run: gh pr list --repo "${{ github.repository }}" --draft --state open
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

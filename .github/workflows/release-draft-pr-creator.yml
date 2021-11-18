@@ -26,8 +26,7 @@ jobs:
 
       - name: Shallow Clone of Repo      
         run: |
-          git config remote.origin.url https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          gh repo clone {{ github.repository -- --sparse
+          git clone --sparse https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: true

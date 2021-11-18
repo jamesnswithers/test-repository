@@ -25,6 +25,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Shallow Clone of Repo      
-        run: gh repo clone ${{ github.repository }} -- --sparse
+        run: gh repo clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git -- --sparse
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

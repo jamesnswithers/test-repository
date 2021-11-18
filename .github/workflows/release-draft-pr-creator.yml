@@ -23,6 +23,6 @@ jobs:
         run: gh config get git_protocol
 
       - name: Shallow Clone of Repo      
-        run: gh repo clone https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git -- --sparse
+        run: gh repo clone https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/${{ github.repository }}.git -- --sparse
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

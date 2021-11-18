@@ -18,3 +18,8 @@ jobs:
         run: gh pr list --repo "${{ github.repository }}" --draft --state open
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Shallow Clone of Repo
+        run: gh repo clone "${{ github.repository }}" -- --sparse
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

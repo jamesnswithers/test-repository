@@ -16,7 +16,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Shallow Clone of Repo      
         run: |
-          git clone --sparse https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git clone --sparse https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: true

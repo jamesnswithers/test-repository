@@ -40,8 +40,8 @@ jobs:
         run: |
           echo "pr exists: [${{ steps.pr_check.outputs.pr_exists }}]"
           
-          echo "Closing PR [${{ steps.pr_check.outputs.number }}]"
-          gh pr close ${{ steps.pr_check.outputs.number }} --delete-branch
+          echo "Closing PR [${{ steps.pr_check.outputs.pr_number }}]"
+          gh pr close ${{ steps.pr_check.outputs.pr_number }} --delete-branch
           
           echo "Creating branch [merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}]"
           git branch merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }} ${{ github.ref_name }}

@@ -1,0 +1,17 @@
+name: Release Draft PR Creator
+
+on:
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - master
+      - development
+
+jobs:
+  create_draft_pr:
+    name: Release Draft PR Creator
+    runs-on: ubuntu-latest
+    steps:
+      # Runs a single command using the runners shell
+      - name: Check existing PRs
+        run: gh list --repo "${{ GITHUB_REPOSITORY }}" --draft --state open

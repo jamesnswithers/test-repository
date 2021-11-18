@@ -15,11 +15,11 @@ jobs:
     steps:
       # Runs a single command using the runners shell
       - name: Check existing PRs
-        run: gh pr list --repo "${{ github.repository }}" --draft --state open
+        run: gh pr list --repo ${{ github.repository }} --draft --state open
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Shallow Clone of Repo
-        run: gh repo clone "git@github.com:${{ github.repository }}.git" -- --sparse
+        run: gh repo clone ${{ github.repository }} -- --sparse
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,44 @@
+name: Release Draft PR Creator
+
+on:
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - main
+      - development
+      - release-*
+
+jobs:
+  create_draft_pr:
+    name: Release Draft PR Creator
+    runs-on: ubuntu-latest
+    steps:
+      # Runs a single command using the runners shell
+      - name: Shallow Clone of Repo      
+        run: |
+          git clone --no-checkout https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
+
+      - name: Debug
+        run: |
+          gh auth status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Check existing PRs
+        id: pr_check
+        run: |
+          target="main"
+          pr_exists=`gh pr list --base $target --state open --json title,id | jq 'any(.[].title;. == "Draft merge of ${{ github.ref_name }} to '$target'")'`
+          echo "##[set-output name=pr_exists;]$pr_exists"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Existing PR Workflow
+        if: steps.pr_check.pr_exists == 'true'
+        run: |
+          echo "pr exists"
+          
+      - name: New PR Workflow
+        if: steps.pr_check.pr_exists != 'true'
+        run: |
+          echo "pr does not exist"

@@ -36,11 +36,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Existing PR Workflow
-        if: steps.pr_check.pr_exists == 'true'
+        if: ${{ steps.pr_check.pr_exists == 'true' }}
         run: |
           echo "pr exists"
           
       - name: New PR Workflow
-        if: steps.pr_check.pr_exists != 'true'
+        if: ${{ steps.pr_check.pr_exists != 'true' }}
         run: |
           echo "pr does not exist"

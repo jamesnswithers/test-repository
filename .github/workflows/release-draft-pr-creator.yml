@@ -28,7 +28,7 @@ jobs:
         id: pr_check
         run: |
           target="main"
-          pr_exists=`gh pr list --base $target --state open --json title,id | jq --arg target "$target" 'any(.[].title;. == \"Draft merge of ${{ github.ref.name }} to $target\")'`
+          pr_exists=`gh pr list --base $target --state open --json title,id | jq --arg target "$target" 'any(.[].title;. == \"Draft merge of ${{ github.ref_name }} to $target\")'`
           echo "##[set-output name=pr_exists;]$pr_exists"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

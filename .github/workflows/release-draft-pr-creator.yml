@@ -44,7 +44,10 @@ jobs:
           gh pr close ${{ steps.pr_check.outputs.pr_number }} --delete-branch
           
           echo "Creating branch [merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}]"
-          git branch merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }} ${{ github.ref_name }}
+          git branch merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }} origin/${{ github.ref_name }}
+          git merge origin/${{ steps.pr_check.outputs.target }}
+          git push -u origin merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}
+          gh pr create --title "Draft merge of ${{ github.ref_name }} to ${{ steps.pr_check.outputs.target }}" --base ${{ steps.pr_check.outputs.target }} --draft
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
@@ -53,4 +56,6 @@ jobs:
         run: |
           echo "pr does not exist [${{ steps.pr_check.outputs.pr_exists }}]"
           git branch merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }} origin/${{ github.ref_name }}
+          git merge origin/${{ steps.pr_check.outputs.target }}
           git push -u origin merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}
+          gh pr create --title "Draft merge of ${{ github.ref_name }} to ${{ steps.pr_check.outputs.target }}" --base ${{ steps.pr_check.outputs.target }} --draft

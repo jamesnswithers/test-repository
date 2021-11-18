@@ -21,8 +21,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: true
 
-      - name: Get Auth Status
-        run: gh auth status
+      - name: Debug
+        run: |
+          dir
+          ls
+          pwd
+          gh auth status
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           

@@ -40,6 +40,9 @@ jobs:
         run: |
           echo "pr exists: [${{ steps.pr_check.outputs.pr_exists }}]"
           
+          git config user.email itreleasemanagement@hastingsdirect.com
+          git config user.name itreleasemanagement
+          
           echo "Closing PR [${{ steps.pr_check.outputs.pr_number }}]"
           gh pr close ${{ steps.pr_check.outputs.pr_number }} --delete-branch
           
@@ -47,10 +50,6 @@ jobs:
           git branch merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }} origin/${{ github.ref_name }}
           git checkout merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}
           git merge origin/${{ steps.pr_check.outputs.target }}
-          
-          git config --global user.email itreleasemanagement@hastingsdirect.com
-          git config --global user.name itreleasemanagement
-          
           git push -u origin merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}
           gh pr create --body "" --title "Draft merge of ${{ github.ref_name }} to ${{ steps.pr_check.outputs.target }}" --base ${{ steps.pr_check.outputs.target }} --draft
         env:
@@ -60,13 +59,13 @@ jobs:
         if: ${{ steps.pr_check.outputs.pr_exists == 'false' }}
         run: |
           echo "pr does not exist [${{ steps.pr_check.outputs.pr_exists }}]"
+          
+          git config user.email itreleasemanagement@hastingsdirect.com
+          git config user.name itreleasemanagement
+          
           git branch merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }} origin/${{ github.ref_name }}
           git checkout merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}
-          git merge origin/${{ steps.pr_check.outputs.target }}
-          
-          git config --global user.email itreleasemanagement@hastingsdirect.com
-          git config --global user.name itreleasemanagement
-          
+          git merge origin/${{ steps.pr_check.outputs.target }}          
           git push -u origin merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}
           gh pr create --body "" --title "Draft merge of ${{ github.ref_name }} to ${{ steps.pr_check.outputs.target }}" --base ${{ steps.pr_check.outputs.target }} --draft
         env:

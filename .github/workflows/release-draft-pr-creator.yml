@@ -14,19 +14,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Runs a single command using the runners shell
-      - name: Check existing PRs
-        run: gh pr list --repo ${{ github.repository }} --draft --state open
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Get Auth Status
-        run: gh auth status
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Shallow Clone of Repo      
         run: |
           git clone --sparse https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: true
+
+      - name: Get Auth Status
+        run: gh auth status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Check existing PRs
+        run: gh pr list --draft --state open
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

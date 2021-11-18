@@ -45,6 +45,8 @@ jobs:
           
           echo "Creating branch [merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }}]"
           git branch merge/action/${{ github.ref_name }}/${{ steps.pr_check.outputs.target }} ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: New PR Workflow
         if: ${{ !steps.pr_check.outputs.pr_exists }}

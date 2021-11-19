@@ -1,0 +1,21 @@
+name: Pull Request on Branch Push
+on:
+  push:
+    branches:
+      - release-*
+
+jobs:
+  auto-pull-request:
+    name: PullRequestCreator
+    runs-on: ubuntu-latest
+    steps:
+      - name: pull-request-action
+        uses: jamesnswithers/pull-request-action@1.0.18
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_PREFIX: "release-"
+          PULL_REQUEST_BRANCH: "main"
+          PULL_REQUEST_BODY: ""
+          PULL_REQUEST_TITLE: "Draft merge of ${{ github.ref_name }} to main"
+          PULL_REQUEST_DRAFT: true
+          PULL_REQUEST_UPDATE: true

@@ -1,0 +1,20 @@
+name: Update Pull Requests
+
+on:
+  push:
+    branches:
+      - release-*
+
+jobs:
+  update_pull_requests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Pull Requests
+        run: |
+          pulls=`gh pr list --json number,title,baseRefName --head ${{ github.ref_name }} --label "auto-update" --state open`
+          echo "$pulls"
+          d=`date '+%FT+%TZ'`
+          echo "$d"
+          echo '$pulls' | | jq '.[].number' | gh api '/repos/jamesnswithers/test-repository/commits?sha=${{ github.ref_name }}&until='$d'&per_page=1&page=1'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

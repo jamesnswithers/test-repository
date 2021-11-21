@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - release-*
+      - main
 
 jobs:
   update_pull_requests:
@@ -11,10 +12,19 @@ jobs:
     steps:
       - name: Update Pull Requests
         run: |
-          pulls=`gh pr list --json number,title,baseRefName --head ${{ github.ref_name }} --label "auto-update" --state open --repo ${{ github.repository }}`
-          echo "$pulls"
+          pulls=`gh pr list --json number,title --base ${{ github.ref_name }} --label "auto-update" --state open --repo ${{ github.repository }}`
+          echo "Pulls: $pulls"
           d=`date '+%FT+%TZ'`
-          echo "$d"
-          echo '$pulls' | jq '.[].number' | gh api '/repos/jamesnswithers/test-repository/commits?sha=${{ github.ref_name }}&until='$d'&per_page=1&page=1' | jq '.[].sha'
+          echo "Date: $d"
+          for pull in $(echo "${pulls}" | jq -r '.[] | @base64'); do
+            _jq() {
+              echo ${pull} | base64 --decode | jq -r ${1}
+            }
+            pull_number=`echo $(_jq '.number')`
+            echo "Pull number: $pull_number"
+            title=`echo $(_jq '.title')`
+            echo "Pull title: $title"
+            gh api -X PUT '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch' -H 'Accept: aapplication/vnd.github.v3+json'
+          done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

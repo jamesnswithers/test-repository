@@ -22,7 +22,8 @@ jobs:
             }
             base_ref=`echo $(_jq '.baseRefName')`
             echo "$base_ref"
-            head_sha=`gh api '/repos/jamesnswithers/test-repository/commits?sha=$base_ref&until='$d'&per_page=1&page=1' | jq '.[].sha'`
+            echo '/repos/jamesnswithers/test-repository/commits?sha='$base_ref'&until='$d'&per_page=1&page=1'
+            head_sha=`gh api '/repos/jamesnswithers/test-repository/commits?sha='$base_ref'&until='$d'&per_page=1&page=1' | jq '.[].sha'`
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -29,7 +29,7 @@ jobs:
             echo "Head sha: $head_sha"
             echo '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch'
             echo '{"expected_head_sha":'$head_sha'}'
-            gh api '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch' -f body='{"expected_head_sha":'$head_sha'}'
+            gh api '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch'
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

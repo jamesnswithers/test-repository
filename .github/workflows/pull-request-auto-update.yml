@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Update Pull Requests
         run: |
-          pulls=`gh pr list --json number,title,baseRefName --head ${{ github.ref_name }} --label "auto-update" --state open`
+          pulls=`gh pr list --json number,title,baseRefName --head ${{ github.ref_name }} --label "auto-update" --state open --repo ${{ github.repository }}`
           echo "$pulls"
           d=`date '+%FT+%TZ'`
           echo "$d"

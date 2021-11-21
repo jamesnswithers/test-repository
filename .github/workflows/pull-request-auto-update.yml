@@ -20,7 +20,7 @@ jobs:
             _jq() {
               echo ${pull} | base64 --decode | jq -r ${1}
             }
-            base_ref=echo $(_jq '.baseRefName')
+            base_ref=`echo $(_jq '.baseRefName')`
             echo "$base_ref"
             head_sha=`gh api '/repos/jamesnswithers/test-repository/commits?sha=$base_ref&until='$d'&per_page=1&page=1' | jq '.[].sha'`
           done

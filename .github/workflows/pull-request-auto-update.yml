@@ -16,7 +16,7 @@ jobs:
           echo "$pulls"
           d=`date '+%FT+%TZ'`
           echo "$d"
-          for pull in $(echo "$pulls" | jq '.[] | @base64'); do
+          for pull in $(echo "${pulls}" | jq '.[] | @base64'); do
             _jq() {
               echo ${pull} | base64 --decode | jq -r ${1}
             }

@@ -17,7 +17,7 @@ jobs:
           d=`date '+%FT+%TZ'`
           echo "$d"
           for pull in $(echo '$pulls' | jq '.[]'); do
-            base_ref=`echo "$pull" | jq '.baseRefName'
+            base_ref=`echo "$pull" | jq '.baseRefName'`
             head_sha=`gh api '/repos/jamesnswithers/test-repository/commits?sha=$base_ref&until='$d'&per_page=1&page=1' | jq '.[].sha'`
           done
         env:

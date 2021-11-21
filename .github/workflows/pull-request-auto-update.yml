@@ -21,10 +21,12 @@ jobs:
               echo ${pull} | base64 --decode | jq -r ${1}
             }
             base_ref=`echo $(_jq '.headRefName')`
+            pull_number=`echo $(_jq '.number')`
             echo "Base ref: $base_ref"
-            echo '/repos/jamesnswithers/test-repository/commits?sha='$base_ref'&until='$d'&per_page=1&page=1'
-            head_sha=`gh api '/repos/jamesnswithers/test-repository/commits?sha='$base_ref'&until='$d'&per_page=1&page=1' | jq '.[].sha'`
+            echo '/repos/${{ github.repository }}/commits?sha='$base_ref'&until='$d'&per_page=1&page=1'
+            head_sha=`gh api '/repos/${{ github.repository }}/commits?sha='$base_ref'&until='$d'&per_page=1&page=1' | jq '.[].sha'`
             echo "Head sha: $head_sha"
+            gh api '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch' -f body='{"expected_head_sha":"'$head_sha'"}'
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

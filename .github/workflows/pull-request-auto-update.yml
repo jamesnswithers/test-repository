@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Update Pull Requests
         run: |
-          pulls=`gh pr list --json number,title,headRefName --base ${{ github.ref_name }} --label "auto-update" --state open --repo ${{ github.repository }}`
+          pulls=`gh pr list --json number,title --base ${{ github.ref_name }} --label "auto-update" --state open --repo ${{ github.repository }}`
           echo "Pulls: $pulls"
           d=`date '+%FT+%TZ'`
           echo "Date: $d"
@@ -20,15 +20,10 @@ jobs:
             _jq() {
               echo ${pull} | base64 --decode | jq -r ${1}
             }
-            base_ref=`echo $(_jq '.headRefName')`
             pull_number=`echo $(_jq '.number')`
-            echo "Base ref: $base_ref"
             echo "Pull number: $pull_number"
-            echo '/repos/${{ github.repository }}/commits?sha='$base_ref'&until='$d'&per_page=1&page=1'
-            head_sha=`gh api '/repos/${{ github.repository }}/commits?sha='$base_ref'&until='$d'&per_page=1&page=1' | jq '.[].sha'`
-            echo "Head sha: $head_sha"
-            echo '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch'
-            echo '{"expected_head_sha":'$head_sha'}'
+            title=`echo $(_jq '.title')`
+            echo "Pull title: $title"
             gh api -X PUT '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch' -H 'Accept: aapplication/vnd.github.v3+json'
           done
         env:

@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Update Pull Requests
         run: |
-          pulls=`gh pr list --json number,title,baseRefName --base ${{ github.ref_name }} --label "auto-update" --state open --repo ${{ github.repository }}`
+          pulls=`gh pr list --json number,title,headRefName --base ${{ github.ref_name }} --label "auto-update" --state open --repo ${{ github.repository }}`
           echo "$pulls"
           d=`date '+%FT+%TZ'`
           echo "$d"
@@ -20,7 +20,7 @@ jobs:
             _jq() {
               echo ${pull} | base64 --decode | jq -r ${1}
             }
-            base_ref=`echo $(_jq '.baseRefName')`
+            base_ref=`echo $(_jq '.headRefName')`
             echo "$base_ref"
             echo '/repos/jamesnswithers/test-repository/commits?sha='$base_ref'&until='$d'&per_page=1&page=1'
             head_sha=`gh api '/repos/jamesnswithers/test-repository/commits?sha='$base_ref'&until='$d'&per_page=1&page=1' | jq '.[].sha'`

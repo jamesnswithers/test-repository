@@ -13,17 +13,18 @@ jobs:
       - name: Update Pull Requests
         run: |
           pulls=`gh pr list --json number,title,headRefName --base ${{ github.ref_name }} --label "auto-update" --state open --repo ${{ github.repository }}`
-          echo "$pulls"
+          echo "Pulls: $pulls"
           d=`date '+%FT+%TZ'`
-          echo "$d"
+          echo "Date: $d"
           for pull in $(echo "${pulls}" | jq -r '.[] | @base64'); do
             _jq() {
               echo ${pull} | base64 --decode | jq -r ${1}
             }
             base_ref=`echo $(_jq '.headRefName')`
-            echo "$base_ref"
+            echo "Base ref: $base_ref"
             echo '/repos/jamesnswithers/test-repository/commits?sha='$base_ref'&until='$d'&per_page=1&page=1'
             head_sha=`gh api '/repos/jamesnswithers/test-repository/commits?sha='$base_ref'&until='$d'&per_page=1&page=1' | jq '.[].sha'`
+            echo "Head sha: $head_sha"
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

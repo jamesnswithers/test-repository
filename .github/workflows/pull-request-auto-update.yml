@@ -29,7 +29,7 @@ jobs:
             echo "Head sha: $head_sha"
             echo '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch'
             echo '{"expected_head_sha":'$head_sha'}'
-            gh api '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch'
+            gh api -X PUT '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch' -H 'Accept: aapplication/vnd.github.v3+json'
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

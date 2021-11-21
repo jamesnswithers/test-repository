@@ -15,6 +15,6 @@ jobs:
           echo "$pulls"
           d=`date '+%FT+%TZ'`
           echo "$d"
-          echo '$pulls' | jq '.[].number' | gh api '/repos/jamesnswithers/test-repository/commits?sha=${{ github.ref_name }}&until='$d'&per_page=1&page=1'
+          echo '$pulls' | jq '.[].number' | (gh api '/repos/jamesnswithers/test-repository/commits?sha=${{ github.ref_name }}&until='$d'&per_page=1&page=1' | jq '.[].sha')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

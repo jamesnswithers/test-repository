@@ -12,11 +12,11 @@ jobs:
     steps:
       - name: Update Pull Requests
         run: |
-          pulls=`gh pr list --json number,title --base ${{ github.ref_name }} --label "auto-update" --state open --repo ${{ github.repository }}`
+          pulls=`gh pr list --json number,title,mergeable -B ${{ github.ref_name }} -l "auto-update" -R ${{ github.repository }}`
           echo "Pulls: $pulls"
           d=`date '+%FT+%TZ'`
           echo "Date: $d"
-          for pull in $(echo "${pulls}" | jq -r '.[] | @base64'); do
+          for pull in $(echo "${pulls}" | jq -r '.[] | select(.mergeable != "CONFLICTING") | @base64'); do
             _jq() {
               echo ${pull} | base64 --decode | jq -r ${1}
             }

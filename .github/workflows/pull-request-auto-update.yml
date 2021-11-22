@@ -24,7 +24,7 @@ jobs:
             echo "Pull number: $pull_number"
             title=`echo $(_jq '.title')`
             echo "Pull title: $title"
-            gh api -X PUT '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch' -H 'Accept: aapplication/vnd.github.v3+json'
+            gh api -X PUT '/repos/${{ github.repository }}/pulls/'$pull_number'/update-branch' -H 'Accept: aapplication/vnd.github.v3+json' || true
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

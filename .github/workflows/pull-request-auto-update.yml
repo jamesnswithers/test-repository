@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Update Pull Requests
         run: |
-          pulls=`gh pr list --json number,title,mergeable -B ${{ github.ref_name }} -l "auto-update" -q '.[] | select(.mergeable != \"CONFLICTING\")' -R ${{ github.repository }}`
+          pulls=`gh pr list --json number,title,mergeable -B ${{ github.ref_name }} -l "auto-update" -q '.[] | select(.mergeable != "CONFLICTING")' -R ${{ github.repository }}`
           echo "Pulls: $pulls"
           d=`date '+%FT+%TZ'`
           echo "Date: $d"
